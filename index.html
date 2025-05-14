@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cat Game Wiki</title>
+    <style>
+        /* Dark Theme Colors */
+        :root {
+            --background: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --text: #f0f0f0;
+            --accent: #ff9800;
+            --accent-hover: #ffb74d;
+            --border: #444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-bg);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        
+        h1 {
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: var(--accent-hover);
+        }
+        
+        /* Navigation Menu */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .menu li {
+            margin: 0 15px;
+        }
+        
+        .menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .menu a:hover {
+            color: var(--accent);
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        
+        /* Content Sections */
+        section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        #home {
+            text-align: center;
+        }
+        
+        #home img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+            margin: 20px 0;
+        }
+        
+        /* Rules section */
+        .rule-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .rule-section:last-child {
+            border-bottom: none;
+        }
+        
+        /* Characters Grid */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .character-card {
+            background-color: rgba(45, 45, 45, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-image {
+            height: 200px;
+            background-color: var(--background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-style: italic;
+        }
+        
+        .character-info {
+            padding: 15px;
+        }
+        
+        .character-name {
+            font-size: 1.4rem;
+            margin-top: 0;
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: var(--secondary-bg);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        
+        /* Hidden sections initially (for potential future JS toggling) */
+        .hidden {
+            display: none;
+        }
+        
+        /* Active section */
+        .active {
+            display: block;
+        }
+        
+        /* Utilities */
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        
+        .mt-0 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>The Cat Game</h1>
+            <p>A game of strategy, deception, and survival</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul class="menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#characters">Characters</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="active">
+            <h2>Welcome to The Cat Game</h2>
+            <div class="home-content">
+                <p>An exciting game of strategy where Farmers, Mice, and a Hamster compete for survival!</p>
+                <div class="cat-image">
+                    <img src="images/MiceAndFarmers1.png" alt="Chinese Cat">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Rules Section -->
+        <section id="rules">
+            <h2>Game Rules</h2>
+            
+            <div class="rule-section">
+                <h3>Game Introduction</h3>
+                <ul>
+                    <li>The game begins with an email informing players about their roles via PDF.</li>
+                    <li>Once everyone confirms they have read the PDF, the game starts.</li>
+                    <li>Farmers can organize via WhatsApp or other methods to plan their moves.</li>
+                    <li>Farmers can position the cat once a day.</li>
+                    <li>The group votes once a day after discussing suspicions.</li>
+                    <li>Bluffing and lying are allowed.</li>
+                </ul>
+            </div>
+            
+            <div class="rule-section">
+                <h3>Teams</h3>
+                <p>There are three teams:</p>
+                <ul>
+                    <li><span class="text-accent">Mice</span>: Must survive and eliminate all Farmers</li>
+                    <li><span class="text-accent">Farmers</span>: Must eliminate all Mice or outnumber them</li>
+                    <li><span class="text-accent">Hamster</span>: Must be the last one remaining with either Farmers or Mice</li>
+                </ul>
+            </div>
+            
+            <div class="rule-section">
+                <h3>Game Phases</h3>
+                <p>The game consists of 2 phases:</p>
+                <ul>
+                    <li><strong>Night Phase:</strong> Occurs between two "day" discussions or from sending PDFs until the first coffee break.</li>
+                    <li><strong>Day Phase:</strong> Group discussion and voting.</li>
+                </ul>
+                <p><em>Example:</em> Monday afternoon + Tuesday morning = night; Tuesday coffee break = day; Tuesday afternoon + Wednesday morning = another night.</p>
+            </div>
+            
+            <div class="rule-section">
+                <h3>The Cat Mechanics</h3>
+                <ul>
+                    <li>Initially, the Cat is placed in a designated safe spot (the shelf in the dining room of B0 where the chips are located).</li>
+                    <li>During the night, the Cat can be positioned by the Farmers to kill a Mouse.</li>
+                    <li>A Mouse, upon discovering the Cat, must announce its elimination in the group chat and return the Cat to the safe spot.</li>
+                    <li>Only living Farmers can move the Cat; dead Farmers cannot.</li>
+                </ul>
+            </div>
+            
+            <div class="rule-section">
+                <h3>Voting System</h3>
+                <ul>
+                    <li>Once per day, all players participate in a group discussion (during coffee breaks or digitally).</li>
+                    <li>Players vote via a Google Form to banish one suspected player from the game.</li>
+                    <li>Voting is divided into two parts: a proposal and a runoff.</li>
+                    <li>In the first part, both alive and dead players vote; in the second part, only living players vote.</li>
+                    <li>If a Mouse is eliminated after the discussion but before voting, they can still vote as alive, because the vote refers to the previous discussion.</li>
+                </ul>
+            </div>
+            
+            <div class="rule-section">
+                <h3>Special Rules</h3>
+                <ul>
+                    <li>Dead players must send their code in the group chat, but must not say how they died.</li>
+                    <li>Dead players cannot speak to the living players, only with the Medium via chat.</li>
+                    <li>Role PDFs cannot be modified, although general lying within the game is permitted.</li>
+                    <li>PDFs cannot be shown unless they are being used to activate powers.</li>
+                    <li>If no one dies for 2 days, one of the farmers has to share their identity before the next vote.</li>
+                </ul>
+            </div>
+            
+            <div class="rule-section">
+                <h3>Win Conditions</h3>
+                <ul>
+                    <li><strong>Farmers win</strong> by eliminating all the Mice or by outnumbering them.</li>
+                    <li><strong>Mice win</strong> by eliminating all the Farmers.</li>
+                    <li><strong>The Hamster wins</strong> if they remain either only with Farmers or only with Mice.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Characters Section -->
+        <section id="characters">
+            <h2>Game Characters</h2>
+            <p>Learn about the different roles and their special abilities in The Cat Game.</p>
+            
+            <div class="characters-grid">
+                <!-- Mouse Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/mice.png" alt="Mouse">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Mouse</h3>
+                        <p><strong>Team:</strong> Mice</p>
+                        <p><strong>Objective:</strong> Survive and eliminate all Farmers.</p>
+                        <p><strong>Special Abilities:</strong> None (standard Mouse)</p>
+                        <p><strong>Description:</strong> Standard Mouse players must avoid the Cat and work with other Mice to identify and vote out Farmers. Strategic voting and survival are essential.</p>
+                    </div>
+                </div>
+                
+                <!-- Farmer Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/farmer.png" alt="Farmer">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Farmer</h3>
+                        <p><strong>Team:</strong> Farmers</p>
+                        <p><strong>Objective:</strong> Eliminate all Mice or outnumber them.</p>
+                        <p><strong>Special Abilities:</strong> Can position the Cat once per day to eliminate Mice.</p>
+                        <p><strong>Description:</strong> Farmers work together secretly to position the Cat strategically and eliminate Mice. They must coordinate their actions while maintaining their cover.</p>
+                    </div>
+                </div>
+                
+                <!-- Hamster Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/hamster.png" alt="Hamster">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Hamster</h3>
+                        <p><strong>Team:</strong> Solo (Third faction)</p>
+                        <p><strong>Objective:</strong> Be the last one remaining with either Farmers or Mice.</p>
+                        <p><strong>Special Abilities:</strong> None mentioned in the rules.</p>
+                        <p><strong>Description:</strong> The Hamster plays both sides, navigating between Mice and Farmers until they can secure their own victory condition.</p>
+                    </div>
+                </div>
+                
+                <!-- Medium Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/medium.png" alt="Medium">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">The Medium</h3>
+                        <p><strong>Team:</strong> Mice</p>
+                        <p><strong>Objective:</strong> Same as Mice - eliminate all Farmers.</p>
+                        <p><strong>Special Abilities:</strong> Can communicate with eliminated (dead) players.</p>
+                        <p><strong>Description:</strong> The Medium can verify whether eliminated players were Mice or not by checking codes sent by dead players. This provides valuable intelligence to the Mouse team.</p>
+                    </div>
+                </div>
+                
+                <!-- Hunter Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/hunter.png" alt="Hunter">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Hunter</h3>
+                        <p><strong>Team:</strong> Mice</p>
+                        <p><strong>Objective:</strong> Same as Mice - eliminate all Farmers.</p>
+                        <p><strong>Special Abilities:</strong> Can shoot one character once per game.</p>
+                        <p><strong>Description:</strong> The Hunter can eliminate another player by sending their PDF to the target. The eliminated player must not reveal they were killed by the Hunter.</p>
+                    </div>
+                </div>
+                
+                <!-- Angel Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/angel.png" alt="Angel">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Angel</h3>
+                        <p><strong>Team:</strong> Mice</p>
+                        <p><strong>Objective:</strong> Same as Mice - eliminate all Farmers.</p>
+                        <p><strong>Special Abilities:</strong> Can resurrect one player once per game.</p>
+                        <p><strong>Description:</strong> The Angel can bring one eliminated player back to life by sending their PDF to the player they wish to resurrect. This can be a game-changing ability.</p>
+                    </div>
+                </div>
+                
+                <!-- Popess Character -->
+                <div class="character-card">
+                    <div class="character-image">
+                         <img src="images/pope.png" alt="Poppess">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">The Popess</h3>
+                        <p><strong>Team:</strong> Mice (assumed from context)</p>
+                        <p><strong>Objective:</strong> Same as Mice - eliminate all Farmers.</p>
+                        <p><strong>Special Abilities:</strong> Knows the role of one random player from the beginning of the game.</p>
+                        <p><strong>Description:</strong> The Popess starts with special knowledge about one player's true role, giving her team a strategic advantage in identifying allies or enemies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>The Cat Game Wiki © 2025 | Based on the official game rules</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple navigation script
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.menu a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target section id
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show the target section
+                    document.getElementById(targetId).style.display = 'block';
+                    
+                    // Update active state in navigation
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
